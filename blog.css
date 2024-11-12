@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f4ed;
+    color: #333;
+  }
+  
+  /* Section Header */
+  .section-title {
+    color: #3a5a40;
+    font-weight: bold;
+  }
+  
+  /* Buttons */
+  .btn-primary {
+    background-color: #a7c957;
+    border: none;
+    color: white;
+  }
+  .btn-primary:hover {
+    background-color: #8cbf57;
+  }
+  .btn-secondary {
+    background-color: #3a5a40;
+    border: none;
+    color: white;
+  }
+  .btn-secondary:hover {
+    background-color: #2f4b2d;
+  }
+  
+  /* Conseil Section */
+  .conseil-section {
+    background-color: #e6f3e6;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+  .conseil-section h4 {
+    color: #3a5a40;
+  }
+  
+  /* Comments Section */
+  .comments-section {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+  .comments-section h4 {
+    color: #3a5a40;
+  }
+  
+  /* Form Styling */
+  textarea.form-control {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  /* Cards */
+  .card {
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .card-body {
+    padding: 20px;
+  }
+  .card h3, .card p {
+    margin: 0;
+  }
+  .card h3 {
+    color: #3a5a40;
+  }
+  
+  /* Meta Data */
+  .post-meta {
+    color: #6b705c;
+  }
+  .meta-date, .meta-categories {
+    font-size: 0.85rem;
+  }
