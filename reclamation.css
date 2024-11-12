@@ -1,0 +1,99 @@
+/* Style pour l'image de fond de la page */
+body {
+    background-image: url('back-1.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style pour l'image de logo en haut à gauche de la page */
+.top-left-image {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 150px;
+    height: auto;
+}
+
+/* Style pour le conteneur du formulaire */
+.form-container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    margin-top: 20px;
+    opacity: 0.9;
+}
+
+/* Style pour le titre du formulaire */
+.form-container h2 {
+    color: #333;
+    text-align: center;
+}
+
+/* Style pour les étiquettes des champs de formulaire */
+label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+/* Style pour les champs de saisie */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* Style pour le bouton d'envoi du formulaire */
+.form-container button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Style pour la section de réclamation */
+.reclaim-section {
+    text-align: center;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e6ffe6;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    opacity: 0.9;
+}
+
+/* Style pour le texte de description dans la section de réclamation */
+.reclaim-section p {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Style pour le bouton de réclamation */
+.reclaim-section button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
