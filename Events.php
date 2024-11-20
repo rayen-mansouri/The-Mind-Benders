@@ -22,9 +22,24 @@ Vous avez envoyé
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-
 </head>
+
+
 <body class="">
+
+<?php
+	include_once __DIR__ . '/../Controller/event_con.php';
+    //include '../../../Model/offre.php';
+    
+    // Création d'une instance du contrôleur des événements
+    $eventC = new eventCon("event");
+    
+    
+
+    $liste_event = $eventC->listEvents();// stokcer les donnees de bd
+
+?>
+
 
   <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <defs>
@@ -98,19 +113,19 @@ Vous avez envoyé
   
       <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
         <li class="nav-item border-dashed active">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href=""></use></svg>
             <span>Home</span>
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href=""></use></svg>
             <span>Log In</span>
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="Sign In"></use></svg>
             <span>Sign In</span>
           </a>
@@ -122,25 +137,25 @@ Vous avez envoyé
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href=""></use></svg>
             <span>Let's Collab</span>
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href=""></use></svg>
             <span>Recent Sponsors</span>
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href=""></use></svg>
             <span>About Us</span>
           </a>
         </li>
         <li class="nav-item border-dashed">
-          <a href="/View/index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
+          <a href="index.html" class="nav-link d-flex align-items-center gap-3 text-dark p-2">
             <svg width="24" height="24" viewBox="0 0 24 24"><use xlink:href="Contact Us"></use></svg>
             <span>Contact Us</span>
           </a>
@@ -223,280 +238,75 @@ Vous avez envoyé
     </div>
   </header>
   
-  <section style="background-image: url('images/bgm.webp');background-repeat: no-repeat;background-size: cover;">
-    <div class="container-lg">
-      <div class="row">
-        <div class="col-lg-6 pt-5 mt-5">
-          <h2 class="display-1 ls-1"><span class="fw-bold text-primary">Organic</span> <h2 style="color: white;"> Foods & Agriculture services <br>at your Doorsteps</h2>
-          
-          <div class="d-flex gap-3">
-            <a href="C:\Users\rayen\OneDrive\Bureau\projet web\organic-1.0.0\shop.html" class="btn btn-primary text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Start Shopping</a>
-            <a href="#" class="btn btn-dark text-uppercase fs-6 rounded-pill px-4 py-3 mt-3">Join Now</a>
-          </div style="height:1px; background: transparent;">
-         <br><br><b><br>  <br><br><br><br><br><br><br><br>
-        </div>
-      </div>
-      
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-3 g-0 justify-content-center">
-        
-        <div class="col">
-          
-        </div>
-        <div class="col">
-          
-        </div>
-      </div>
+ 
+ 
+
+  <section class="pb-4 my-4"></section>
     
-    </div>
-    
-  </section>
-
-  
-  <br>
-  
-  <section class="py-3">
-    <div class="container-lg">
-      <div class="row">
-        <div class="col-md-12">
-
-          <div class="banner-blocks">
-          
-            <div class="banner-ad d-flex align-items-center large bg-info block-1" style="background: url('images/banner-ad-1.jpg') no-repeat; background-size: cover;">
-              <div class="banner-content p-5">
-                <div class="content-wrapper text-light">
-                  <h3 class="banner-title text-light">View our Shop</h3>
-                  <p>Sign in as a client</p>
-                  <a href="#" class="btn-link text-white">Shop Now</a>
-                </div>
-              </div>
-            </div>
-            
-            <div class="banner-ad bg-success-subtle block-2" style="background:url('images/banner-ad-2.jpg') no-repeat;background-size: cover">
-              <div class="banner-content align-items-center p-5">
-                <div class="content-wrapper text-light">
-                  <h3 class="banner-title text-light">Sell on Our Platform</h3>
-                  <p>Sign in as a Seller</p>
-                  <a href="#" class="btn-link text-white">Sell Now</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="banner-ad bg-danger block-3" style="background:url('images/banner-ad-3.jpg') no-repeat;background-size: cover">
-              <div class="banner-content align-items-center p-5">
-                <div class="content-wrapper text-light">
-                  <h3 class="banner-title text-light">Manage your Platform</h3>
-                  <p>Sign in as an Administrator</p>
-                  <a href="#" class="btn-link text-white">Manage Now</a>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <!-- / Banner Blocks -->
-            
-        </div>
-      </div>
-    </div>
-  </section>
-
-  
-  
-  <section>
-    <div class="container-lg">
-
-      <div class="bg-secondary text-light py-5 my-5" style="background: url('images/banner-newsletter.jpg') no-repeat; background-size: cover;">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-5 p-3">
-              <div class="section-header">
-                <h2 class="section-title display-5 text-light">In case you had one of our discount coupons</h2>
-              </div>
-              <p>Just write it in. </p>
-            </div>
-            <div class="col-md-5 p-3">
-              <form>
-                <br><div class="mb-3">
-                  <label for="name" class="form-label d-none">Coupon Code</label>
-                  <input type="text" class="form-control form-control-md rounded-0" name="name" id="name" placeholder="Coupon  Code">
-                </div>
-                
-                <div class="d-grid gap-2">
-                  <button type="submit" class="btn btn-dark btn-md rounded-0">Submit</button>
-                </div>
-              </form>
-              
-            </div>
-            
-          </div>
-          
-        </div>
-      </div>
-      
-    </div>
-  </section>
-
-  
-
-
-  <section class="pb-4 my-4">
-    <div class="container-lg">
-
-      <div class="bg-warning pt-5 rounded-5">
-        <div class="container">
-          <div class="row justify-content-center align-items-center">
-            <div class="col-md-4">
-              <h2 class="mt-5">Try Our New Ai ChatBot</h2>
-              <p>Have Your local friendly farmer in your own pocket by clicking on the text icon on the buttom right</p>
-              <div class="d-flex gap-2 flex-wrap mb-5">
-               
-              </div>
-            </div>
-            <div class="col-md-5">
-              <img src="images/banner-onlineapp.png" alt="phone" class="img-fluid">
-            </div>
-          </div>
-        </div>
-      </div>
-      
-    </div>
  
     <section id="latest-blog" class="pb-4">
       <div class="container-lg">
         <div class="row">
           <div class="section-header d-flex align-items-center justify-content-between my-4">
-            <h2 class="section-title">Our Recent Sponsors</h2>
-            <a href="#" class="btn btn-primary">View All</a>
+            <h2 class="section-title">Our Events</h2>
           </div>
         </div>
+
+
         <div class="row">
-          <div class="col-md-4">
-            <article class="post-item card border-0 shadow-sm p-3">
-              <div class="image-holder zoom-effect">
-                <a href="#">
-                  <img src="images/delice.jpeg" alt="post" class="card-img-top">
-                </a>
+    <?php
+    // Counter to track the number of events
+    $counter = 0;
+
+    // Loop through each event and display it
+    foreach ($liste_event as $event) {
+      // Open a new row every 3 events
+      if ($counter % 3 == 0 && $counter != 0) {
+        echo '</div><div class="row">';
+      }
+    ?>
+      <div class="col-md-4">
+        <article class="post-item card border-0 shadow-sm p-3">
+          
+          <div class="card-body">
+            <div class="post-meta d-flex text-uppercase gap-3 my-2 align-items-center">
+              <div class="meta-date">
+                <svg width="16" height="16"><use xlink:href="#calendar"></use></svg>
+                <?php echo htmlspecialchars($event['date']); ?>
               </div>
-              <div class="card-body">
-                <div class="post-meta d-flex text-uppercase gap-3 my-2 align-items-center">
-                  <div class="meta-date"><svg width="16" height="16"><use xlink:href="#calendar"></use></svg>22 Aug 2021</div>
-                  <div class="meta-categories"><svg width="16" height="16"><use xlink:href="#category"></use></svg></div>
-                </div>
-                <div class="post-header">
-                  <h3 class="post-title">
-                    <a href="#" class="text-decoration-none">Delice</a>
-                  </h3>
-                  <p>Delice is one of the Major sponsors of our platfom providing various agriculture fresh products.</p>
-                </div>
+              <div class="meta-categories">
+                <i class="fa-solid fa-money-bill"></i>
+                <?php echo htmlspecialchars($event['prix']); ?> TND
               </div>
-            </article>
+            </div>
+            <div class="post-header">
+              <h3 class="post-title" style="color: #0d6dfd;">
+                
+                  <?php echo htmlspecialchars($event['titre']); ?>
+
+              </h3>
+              <p><?php echo htmlspecialchars($event['description']); ?></p>
+
+            </div>
           </div>
-          <div class="col-md-4">
-            <article class="post-item card border-0 shadow-sm p-3">
-              <div class="image-holder zoom-effect">
-                <a href="#">
-                  <img src="images/OIP.jpeg" alt="post" class="card-img-top">
-                </a>
-              </div>
-              <div class="card-body">
-                <div class="post-meta d-flex text-uppercase gap-3 my-2 align-items-center">
-                  <div class="meta-date"><svg width="16" height="16"><use xlink:href="#calendar"></use></svg>25 Aug 2021</div>
-                  <div class="meta-categories"><svg width="16" height="16"><use xlink:href="#category"></use></svg></div>
-                </div>
-                <div class="post-header">
-                  <h3 class="post-title">
-                    <a href="#" class="text-decoration-none">Danone</a>
-                  </h3>
-                  <p>Danon is a our most recent collaboration to improve our products diversity and create a multiple choices purchases for our customers for a better experience</p>
-                </div>
-              </div>
-            </article>
-          </div>
-          <div class="col-md-4">
-            <article class="post-item card border-0 shadow-sm p-3">
-              <div class="image-holder zoom-effect">
-                <a href="#">
-                  <img src="images/nestle.png" alt="post" class="card-img-top">
-                </a>
-              </div>
-              <div class="card-body">
-                <div class="post-meta d-flex text-uppercase gap-3 my-2 align-items-center">
-                  <div class="meta-date"><svg width="16" height="16"><use xlink:href="#calendar"></use></svg>28 Aug 2021</div>
-                  <div class="meta-categories"><svg width="16" height="16"><use xlink:href="#category"></use></svg></div>
-                </div>
-                <div class="post-header">
-                  <h3 class="post-title">
-                    <a href="#" class="text-decoration-none">Nestle</a>
-                  </h3>
-                  <p>Nestle is a major feeding company containing multiple food brands </p>
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
+        </article>
+      </div>
+    <?php
+      $counter++;
+    }
+    ?>
+  </div>
+
+  <?php if ($counter == 0) { ?>
+    <div class="alert alert-info">No events found.</div>
+  <?php } ?>
+
+
+
       </div>
     </section>
 
-  <section class="py-5">
-    <div class="container-lg">
-      <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-5">
-        <div class="col">
-          <div class="card mb-3 border border-dark-subtle p-3">
-            <div class="text-dark mb-3">
-              <svg width="32" height="32"><use xlink:href="#package"></use></svg>
-            </div>
-            <div class="card-body p-0">
-              <h5>Free delivery</h5>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card mb-3 border border-dark-subtle p-3">
-            <div class="text-dark mb-3">
-              <svg width="32" height="32"><use xlink:href="#secure"></use></svg>
-            </div>
-            <div class="card-body p-0">
-              <h5>100% secure payment</h5>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card mb-3 border border-dark-subtle p-3">
-            <div class="text-dark mb-3">
-              <svg width="32" height="32"><use xlink:href="#quality"></use></svg>
-            </div>
-            <div class="card-body p-0">
-              <h5>Quality guarantee</h5>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card mb-3 border border-dark-subtle p-3">
-            <div class="text-dark mb-3">
-              <svg width="32" height="32"><use xlink:href="#savings"></use></svg>
-            </div>
-            <div class="card-body p-0">
-              <h5>guaranteed savings</h5>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card mb-3 border border-dark-subtle p-3">
-            <div class="text-dark mb-3">
-              <svg width="32" height="32"><use xlink:href="#offers"></use></svg>
-            </div>
-            <div class="card-body p-0">
-              <h5>Daily offers</h5>
-              <p class="card-text"></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+    <section class="pb-4 my-4"></section>
 
   <footer class="py-5">
     <div class="container-lg">
@@ -597,7 +407,7 @@ Vous avez envoyé
           <div class="footer-menu">
             <h5 class="widget-title">Subscribe Us</h5>
             <p>Subscribe to our newsletter to get updates about our grand offers.</p>
-            <form class="d-flex mt-3 gap-0" action="/View/index.html">
+            <form class="d-flex mt-3 gap-0" action="index.html">
               <input class="form-control rounded-start rounded-0 bg-light" type="email" placeholder="Email Address" aria-label="Email Address">
               <button class="btn btn-dark rounded-end rounded-0" type="submit">Subscribe</button>
             </form>

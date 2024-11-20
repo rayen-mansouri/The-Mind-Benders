@@ -18,7 +18,7 @@ body {
   --bs-link-color: #333;
   --bs-link-hover-color:#333;
 
-  --bs-link-color-rgb: 40,40,40;
+  --bs-link-color-rgb: 13, 110, 253;
   --bs-link-hover-color-rgb: 0,0,0;
 
   --bs-light-rgb: 248, 248, 248;
@@ -30,8 +30,8 @@ body {
   --bs-body-line-height: 2;
   --bs-body-color: #747474;
 
-  --bs-primary: #6BB252;
-  --bs-primary-rgb: 107, 178, 82;
+  --bs-primary: #0d6dfd;
+  --bs-primary-rgb: 13, 110, 253;
   
   --bs-secondary: #364127;
   --bs-secondary-rgb: 54, 65, 39;
@@ -348,6 +348,7 @@ h1,h2,h3,h4,h5,h6 {
   /* border: none; */
   border-bottom: 3px solid var(--bs-primary);
 }
+
 
 /* products-carousel */
 .products-carousel .swiper, .products-carousel .swiper-container {
