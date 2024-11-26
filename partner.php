@@ -28,15 +28,15 @@ Vous avez envoyé
 <body class="">
 
 <?php
-	include_once __DIR__ . '/../Controller/event_con.php';
+	include_once __DIR__ . '/../Controller/partner_con.php';
     //include '../../../Model/offre.php';
     
     // Création d'une instance du contrôleur des événements
-    $eventC = new eventCon("event");
+    $partnerCon = new partnerCon('partner');
     
     
 
-    $liste_event = $eventC->listEvents();// stokcer les donnees de bd
+    $partner = $partnerCon->getPartner($_GET['id']);// stokcer les donnees de bd
 
 ?>
 
@@ -254,54 +254,37 @@ Vous avez envoyé
 
 
         <div class="row">
-    <?php
-    // Counter to track the number of events
-    $counter = 0;
-
-    // Loop through each event and display it
-    foreach ($liste_event as $event) {
-      // Open a new row every 3 events
-      if ($counter % 3 == 0 && $counter != 0) {
-        echo '</div><div class="row">';
-      }
-    ?>
+   
       <div class="col-md-4">
         <article class="post-item card border-0 shadow-sm p-3">
           
           <div class="card-body">
             <div class="post-meta d-flex text-uppercase gap-3 my-2 align-items-center">
-              <div class="meta-date">
-                <svg width="16" height="16"><use xlink:href="#calendar"></use></svg>
-                <?php echo htmlspecialchars($event['date']); ?>
-              </div>
+              
               <div class="meta-categories">
-                <i class="fa-solid fa-money-bill"></i>
-                <?php echo htmlspecialchars($event['prix']); ?> TND
+                <i class="fa-solid fa-envelope"></i>
+                <?php echo htmlspecialchars($partner['email']); ?>
               </div>
             </div>
             <div class="post-header">
               <h3 class="post-title" style="color: #0d6dfd;">
                 
-                  <?php echo htmlspecialchars($event['titre']); ?>
+                  <?php echo htmlspecialchars($partner['name']); ?>
 
               </h3>
-              <p><?php echo htmlspecialchars($event['description']); ?></p>
+              <p><?php echo htmlspecialchars($partner['address']); ?></p>
 
-              <?php if (!empty($event['partner_id'])) { ?>
-              <a href="./partner.php?id=<?= htmlspecialchars($event['partner_id']); ?>" class="btn btn-primary">View Partner</a>
-              <?php } ?>
+              
+              <a href="./Events.php" class="btn btn-primary">Go Back</a>
             </div>
           </div>
         </article>
       </div>
-    <?php
-      $counter++;
-    }
-    ?>
+
   </div>
 
-  <?php if ($counter == 0) { ?>
-    <div class="alert alert-info">No events found.</div>
+  <?php if (empty($partner)) { ?>
+    <div class="alert alert-info">No partner found.</div>
   <?php } ?>
 
 
