@@ -4,7 +4,7 @@ class config
 {
     private static $pdo = null;
 
-    public static function getConnexion()
+    public static function getConnexion() //non creation dobjet
     {
         if (!isset(self::$pdo)) {
             try {

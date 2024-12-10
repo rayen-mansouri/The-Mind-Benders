@@ -1,5 +1,6 @@
 <?php
 include '../controller/commentaireC.php';
+include_once '../controller/likesC.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve data from the POST request

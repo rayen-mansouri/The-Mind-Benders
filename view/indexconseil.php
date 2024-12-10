@@ -7,7 +7,7 @@ include_once '../controller/likesC.php';
 
 $s = new conseilC();
 $commentaireC = new commentaireC();
-
+$voteController = new VoteController(); 
 //affichage
   $tab = $s->afficher();
 
@@ -183,16 +183,22 @@ $commentaireC = new commentaireC();
     // Charger les commentaires pour le conseil actuel
     $commentaires = $commentaireC->afficherCommentaires($conseil['id_con']);
     if (!empty($commentaires)) {
-        foreach ($commentaires as $commentaire) { ?>
+        foreach ($commentaires as $commentaire) {
+          $votes = $voteController->getVotesByComment($commentaire['id_cmnt']);
+        $totalLikes = $votes['total_likes'] ?? 0;
+        $totalDislikes = $votes['total_dislikes'] ?? 0; ?>
             <div class="comment mb-3">
-                <p><strong>Date :</strong> <?= $commentaire['date_pub'] ?></p>
-                <p id="contenu-comment-<?= $commentaire['id_cmnt'] ?>"><?= htmlspecialchars($commentaire['contenu']) ?></p>
+            <p><strong>Date :</strong> <?= $commentaire['date_pub'] ?></p>
+            <p id="contenu-comment-<?= $commentaire['id_cmnt'] ?>">
+                <?= htmlspecialchars($commentaire['contenu']) ?>
+            </p>
               
-                <button class="btn btn-success" onclick="likeComment(<?= $commentaire['id_cmnt'] ?>, 'like')">👍 Like</button>
-<button class="btn btn-danger" onclick="likeComment(<?= $commentaire['id_cmnt'] ?>, 'dislike')">👎 Dislike</button>
-<span id="like-count-<?= $commentaire['id_cmnt'] ?>">0</span> Likes
-<span id="dislike-count-<?= $commentaire['id_cmnt'] ?>">0</span> Dislikes
-
+                
+            <button class="btn btn-success" onclick="likeComment(<?= $commentaire['id_cmnt'] ?>, 'like')">👍 Like</button>
+            <button class="btn btn-danger" onclick="likeComment(<?= $commentaire['id_cmnt'] ?>, 'dislike')">👎 Dislike</button>
+            <span id="like-count-<?= $commentaire['id_cmnt'] ?>"><?= $totalLikes ?></span> Likes
+            <span id="dislike-count-<?= $commentaire['id_cmnt'] ?>"><?= $totalDislikes ?></span> Dislikes
+        
                 <!-- Formulaire d'édition (initialement caché) -->
                 <form action="uppdatecommentaire.php" method="post" style="display:none;" id="form-update-<?= $commentaire['id_cmnt'] ?>">
                     <input type="hidden" name="id_cmnt" value="<?= $commentaire['id_cmnt'] ?>">
@@ -239,40 +245,40 @@ $commentaireC = new commentaireC();
           </footer>
           <script> window.chtlConfig = { chatbotId: "2735997893" } </script>
 <script async data-id="2735997893" id="chatling-embed-script" type="text/javascript" src="https://chatling.ai/js/embed.js"></script>
-        
-         <script>document.addEventListener("DOMContentLoaded", function () {
-    // Sélectionner tous les formulaires de commentaire
-    const commentForms = document.querySelectorAll("form[action='likecommentaire.php']");
+  
 
-    commentForms.forEach((form) => {
-        form.addEventListener("submit", function (event) {
-            // Trouver la zone de commentaire dans le formulaire (si elle existe)
-            const textarea = form.querySelector("textarea");
-            const errorMessage = form.querySelector(".error-message");
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Sélectionnez tous les formulaires de commentaire
+        const commentForms = document.querySelectorAll("form[action='ajoutCommentaire.php']");
 
-            // Réinitialiser le message d'erreur
-            if (errorMessage) {
-                errorMessage.textContent = "";
-            }
+        commentForms.forEach((form) => {
+            form.addEventListener("submit", function (event) {
+                // Sélectionner la zone de texte pour le commentaire
+                const textarea = form.querySelector("textarea[name='contenu']");
+                const errorMessage = form.querySelector("#error-message");
 
-            if (textarea && textarea.value.trim() === "") {
-                // Empêche l'envoi du formulaire si le champ est vide
-                event.preventDefault();
-
-                // Ajouter un message d'erreur
-                if (!errorMessage) {
-                    const newError = document.createElement("p");
-                    newError.className = "error-message text-danger";
-                    newError.textContent = "Le commentaire ne peut pas être vide.";
-                    form.insertBefore(newError, form.firstChild);
-                } else {
-                    errorMessage.textContent = "Le commentaire ne peut pas être vide.";
+                // Réinitialiser le message d'erreur (au cas où il existe déjà)
+                if (errorMessage) {
+                    errorMessage.style.display = "none";
                 }
-            }
+
+                // Vérifier si le contenu du commentaire respecte les critères
+                if (!textarea || textarea.value.trim().length < 10) {
+                    // Empêcher l'envoi du formulaire
+                    event.preventDefault();
+
+                    // Afficher le message d'erreur
+                    if (errorMessage) {
+                        errorMessage.style.display = "block";
+                        errorMessage.textContent = "Le commentaire doit contenir au moins 10 caractères.";
+                    }
+                }
+            });
         });
     });
-});
-</script> 
+</script>
+
 
 
 <script>
@@ -301,7 +307,7 @@ $commentaireC = new commentaireC();
 <script>
  function likeComment(idCmnt, voteType) {
     var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'path_to_your_php_script', true); // Remplacez par le chemin correct
+    xhr.open('POST', 'Ajoutlikes.php', true); // Remplacez par le chemin correct
     xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     xhr.onload = function() {
         if (xhr.status == 200) {

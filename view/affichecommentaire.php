@@ -1,8 +1,9 @@
 <?php
 include_once '../controller/commentaireC.php';
-
+include_once '../controller/likesC.php';
 // Initialiser le contrôleur des commentaires
 $commentaireC = new commentaireC();
+$voteController = new VoteController(); 
 
 // Récupérer la valeur du critère de tri depuis l'URL ou par défaut "id_cmnt"
 $tri = isset($_GET['tri']) ? $_GET['tri'] : 'id_cmnt';
@@ -216,16 +217,24 @@ $comments = $commentaireC->afficherTousCommentaires($tri);
             <th>Date de Publication</th>
             <th>ID Conseil</th>
             <th>Actions</th>
+            <th>Likes</th>
+        <th>Dislikes</th>
+           
         </tr>
     </thead>
     <tbody>
         <?php if (!empty($comments)) {
-            foreach ($comments as $comment) { ?>
+            foreach ($comments as $comment) { 
+              $votes = $voteController->getVotesByComment($comment['id_cmnt']); // Récupérer les votes
+            $totalLikes = $votes['total_likes'] ?? 0; // Nombre de likes
+            $totalDislikes = $votes['total_dislikes'] ?? 0; // Nombre de dislikes?>
                 <tr>
                     <td><?= $comment['id_cmnt'] ?></td>
                     <td><?= $comment['contenu'] ?></td>
                     <td><?= $comment['date_pub'] ?></td>
                     <td><?= $comment['id_con'] ?></td>
+                    <td><?= $totalLikes ?></td>
+                    <td><?= $totalDislikes ?></td>
                     <td>
                         <a href="suppcommentaire.php?id_cmnt=<?= $comment['id_cmnt'] ?>">
                             <button class="btn btn-outline-danger btn-sm">Supprimer</button>
