@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Enregistrement les Coordonnées de votre Produit</title>
     <link rel="stylesheet" href="styles.css">
-    <style>table {
+    <style>
+        table {
             width: 80%;
             margin: 20px auto;
             border-collapse: collapse;
@@ -33,6 +33,7 @@
         tr:hover {
             background-color: rgba(0, 0, 0, 0.1);
         }
+
         .delete-btn {
             color: #fff;
             background-color: #ff4d4d;
@@ -110,109 +111,196 @@
 
         .close-btn:hover {
             color: #fff;
-        
-            
         }
 
-</style>
+        .image-slider {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-slider img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .image-slider img.active {
+            opacity: 1;
+        }
+
+        .row {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+
+        .chart-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            text-align: center;
+            line-height: 200px;
+            color: #aaa;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+
     <?php
-try {
-    $dsn = "mysql:host=localhost;dbname=ges-produit"; // Adjust 'localhost' and 'ges-produit' as needed
-    $user = "root";
-    $password = "";
+    try {
+        $dsn = "mysql:host=localhost;dbname=ges-produit"; // Adjust 'localhost' and 'ges-produit' as needed
+        $user = "root";
+        $password = "";
 
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    if (isset($_GET['delete_id'])) {
-        $delete_sql = "DELETE FROM produit WHERE `id-produit` = ?";
-        $delete_stmt = $pdo->prepare($delete_sql);
-        $delete_stmt->execute([$_GET['delete_id']]);
+        $pdo = new PDO($dsn, $user, $password);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        // Redirect to avoid resubmission on refresh
-        header("Location: " . $_SERVER['PHP_SELF']);
-        exit();
+        if (isset($_GET['delete_id'])) {
+            $delete_sql = "DELETE FROM produit WHERE `id-produit` = ?";
+            $delete_stmt = $pdo->prepare($delete_sql);
+            $delete_stmt->execute([$_GET['delete_id']]);
+
+            // Redirect to avoid resubmission on refresh
+            header("Location: " . $_SERVER['PHP_SELF']);
+            exit();
+        }
+
+        // Fetch all products from the database
+        $sql = "SELECT * FROM produit";
+        $stmt = $pdo->query($sql);
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        echo "Error: " . $e->getMessage();
     }
-    // Fetch all products from the database
-    $sql = "SELECT * FROM produit";
-    $stmt = $pdo->query($sql);
-    $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    echo "Error: " . $e->getMessage();
-}
-?>
+    ?>
 
-
-    
 </head>
 
 <body>
-  
 
 <button class="menu-toggle" onclick="toggleMenu()">☰ Menu</button>
 
-    <!-- Sidebar Menu -->
-    <div id="sidebar" class="sidebar">
-        <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
-        <a href="#home">Home</a>
-        <a href="#sponsors">Sponsors</a>
-        <a href="#about">About Us</a>
-        <a href="#contact">Contact</a>
-        <a href="#shop">Shop</a>
-    </div>
+<!-- Sidebar Menu -->
+<div id="sidebar" class="sidebar">
+    <a href="#" class="close-btn" onclick="toggleMenu()">×</a>
+    <a href="#home">Home</a>
+    <a href="#sponsors">Sponsors</a>
+    <a href="#about">About Us</a>
+    <a href="#contact">Contact</a>
+    <a href="#shop">Shop</a>
+</div>
 
-
-
-    <script>
-        // Function to toggle the sidebar menu
-        function toggleMenu() {
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar.style.width === '250px') {
-                sidebar.style.width = '0';
-            } else {
-                sidebar.style.width = '250px';
-            }
+<script>
+    // Function to toggle the sidebar menu
+    function toggleMenu() {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar.style.width === '250px') {
+            sidebar.style.width = '0';
+        } else {
+            sidebar.style.width = '250px';
         }
-    </script>
+    }
 
+    document.addEventListener("DOMContentLoaded", () => {
+        const images = document.querySelectorAll(".image-slider img");
+        let currentIndex = 0;
 
+        setInterval(() => {
+            // Remove 'active' class from the current image
+            images[currentIndex].classList.remove("active");
 
-<h2>Liste des Produits</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Stock Unit</th>
-                <th>Stock</th>
-                <th>Producteur</th>
-                <th>Date d'expiration</th>
-                <th>Delete Product</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($products)): ?>
-                <?php foreach ($products as $product): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($product['id-produit']) ?></td>
-                        <td><?= htmlspecialchars($product['namep']) ?></td>
-                        <td><?= htmlspecialchars($product['stocku']) ?></td>
-                        <td><?= htmlspecialchars($product['stock']) ?></td>
-                        <td><?= htmlspecialchars($product['producteur']) ?></td>
-                        <td><?= htmlspecialchars($product['date_exp']) ?></td>
-                        <td>
-                            <form method="get" onsubmit="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
-                                <input type="hidden" name="delete_id" value="<?= $product['id-produit'] ?>">
-                                <button type="submit" class="delete-btn">Supprimer</button>
-                            </form>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
+            // Calculate the next image index
+            currentIndex = (currentIndex + 1) % images.length;
+
+            // Add 'active' class to the next image
+            images[currentIndex].classList.add("active");
+        }, 3000); // Change image every 3 seconds
+    });
+</script>
+
+<div class="image-slider">
+    <img src="product-thumb-28.png" alt="Image 1" class="active">
+    <img src="product-thumb-25.png" alt="Image 2">
+    <img src="product-thumb-27.png" alt="Image 3">
+</div>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Stock Unit</th>
+            <th>Stock</th>
+            <th>Producteur</th>
+            <th>Date d'expiration</th>
+            <th>Image Path</th> <!-- New column for Image Path -->
+            <th>Delete Product</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php if (!empty($products)): ?>
+            <?php foreach ($products as $product): ?>
                 <tr>
-                    <td colspan="6">Aucun produit trouvé.</td>
+                    <td><?= htmlspecialchars($product['id-produit']) ?></td>
+                    <td><?= htmlspecialchars($product['namep']) ?></td>
+                    <td><?= htmlspecialchars($product['stocku']) ?></td>
+                    <td><?= htmlspecialchars($product['stock']) ?></td>
+                    <td><?= htmlspecialchars($product['producteur']) ?></td>
+                    <td><?= htmlspecialchars($product['date_exp']) ?></td>
+                    <td><?= htmlspecialchars($product['image_path']) ?></td> <!-- Display Image Path -->
+                    <td>
+                        <form method="get" onsubmit="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
+                            <input type="hidden" name="delete_id" value="<?= $product['id-produit'] ?>">
+                            <button type="submit" class="delete-btn">Supprimer</button>
+                        </form>
+                    </td>
                 </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
-</body>
-</html>
+            <?php endforeach; ?>
+        <?php else: ?>
+            <tr>
+                <td colspan="8">Aucun produit trouvé.</td>
+            </tr>
+        <?php endif; ?>
+    </tbody>
+</table>
+
+<script> window.chtlConfig = { chatbotId: "2735997893" } </script>
+<script async data-id
