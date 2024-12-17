@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reCAPTCHA</title>
+    <!-- Liens vers des ressources de style externe -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <script>
+        function onSubmit(token) {
+          document.getElementById("demo-form").submit();
+        }
+      </script>
+      
+    <style>
+        /* Styles personnalisés */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0; /* Couleur de fond de la page */
+            display: flex; /* Utilisation de Flexbox */
+            align-items: center; /* Centrer verticalement */
+            justify-content: center; /* Centrer horizontalement */
+            height: 100vh; /* Hauteur de l'écran */
+        }
+        .container {
+            max-width: 400px; /* Largeur maximale du contenu */
+            padding: 20px;
+            border-radius: 10px; /* Bordures arrondies */
+            background-color: #fff; /* Couleur de fond du formulaire */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Ombre légère */
+        }
+        h3 {
+            color: #333;
+            text-align: center;
+        }
+        p {
+            color: #666;
+            text-align: center;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: calc(100% - 22px); /* Largeur du champ de texte */
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        input[type="submit"] {
+            width: 100%;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h3>Je ne suis pas un robot</h3>
+        <p>Quel est le résultat de 5 + 7 ?</p>
+        <form action="pw_reset/mot_passe_oublier.php" method="post">
+            <label for="captcha">Réponse :</label>
+            <input type="text" id="captcha" name="captcha" >
+            <input type="submit" value="Vérifier">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <?php
 // Inclure la configuration et la connexion à la base de données
-include_once '../config.php';
+include_once '../../config.php';
 
 class VoteController
 {
@@ -8,7 +8,7 @@ class VoteController
     public function getVotesByComment($id_cmnt)
     {
         try {
-            $pdo = config::getConnexion();
+            $pdo = Database::getConnexion();  // Remplacez 'config' par 'Database'
             $query = $pdo->prepare("
                 SELECT 
                     SUM(type_like = 'like') AS total_likes, 
@@ -27,7 +27,7 @@ class VoteController
     public function incrementVote($id_cmnt, $voteType, $user_id)
     {
         try {
-            $pdo = config::getConnexion();
+            $pdo = Database::getConnexion();  // Remplacez 'config' par 'Database'
 
             // Vérifier si l'utilisateur a déjà voté
             $query = $pdo->prepare("

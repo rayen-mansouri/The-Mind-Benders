@@ -1,12 +1,12 @@
 <?php
-include_once '../config.php';
+include_once '../../config.php';  // Assurez-vous que le chemin est correct
 
 class commentaireC {
     // Fetch comments for a specific conseil
     public function afficherCommentaires($id_con) {
         try {
             $sql = "SELECT * FROM commentair WHERE id_con = :id_con";
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             $query = $db->prepare($sql);
             $query->bindValue(':id_con', $id_con, PDO::PARAM_INT);
             $query->execute();
@@ -19,7 +19,7 @@ class commentaireC {
     // Add a new comment
     public function ajouterCommentaire($id_con, $contenu) {
         try {
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             $query = $db->prepare("INSERT INTO commentair (id_con, contenu, date_pub) VALUES (:id_con, :contenu, NOW())");
             $query->execute(['id_con' => $id_con, 'contenu' => $contenu]);
         } catch (Exception $e) {
@@ -30,7 +30,7 @@ class commentaireC {
     // Fetch all comments with optional sorting
     public function afficherTousCommentaires($tri = 'id_cmnt') {
         try {
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             // Validate sort criteria
             $allowedSorts = ['id_cmnt', 'date_pub'];
             if (!in_array($tri, $allowedSorts)) {
@@ -48,7 +48,7 @@ class commentaireC {
     // Delete a comment by ID
     public function supprimer($id_comnt) {
         try {
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             $sql = "DELETE FROM commentair WHERE id_cmnt = :id_cmnt";
             $query = $db->prepare($sql);
             $query->execute(['id_cmnt' => $id_comnt]);
@@ -60,7 +60,7 @@ class commentaireC {
     // Update a comment
     public function updateCommentaire($id_cmnt, $contenu) {
         try {
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             $query = "UPDATE commentair SET contenu = :contenu WHERE id_cmnt = :id_cmnt";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':id_cmnt', $id_cmnt, PDO::PARAM_INT);
@@ -74,7 +74,7 @@ class commentaireC {
     // Get a comment by ID
     public function getCommentaireById($id_cmnt) {
         try {
-            $db = config::getConnexion();
+            $db = Database::getConnexion();  // Utilisez Database au lieu de config
             $query = "SELECT * FROM commentair WHERE id_cmnt = :id_cmnt";
             $stmt = $db->prepare($query);
             $stmt->bindParam(':id_cmnt', $id_cmnt, PDO::PARAM_INT);

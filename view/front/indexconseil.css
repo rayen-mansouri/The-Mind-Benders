@@ -19,27 +19,28 @@ body {
   padding: 20px;
 }
 
-/* Section Header */
+
+
 .section-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  margin: 2rem 0; /* Add some space above and below */
 }
 
 .section-title {
-  font-size: 3rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  font-weight: 600;
   color: #3a5a40;
-  text-align: center;
-  margin: 0 auto;
+  margin: 0; /* Remove default margin */
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .section-title:hover {
-  color: #6A8E00;
-  transition: font-size 0.3s ease;
-  font-size: 2rem;
+  color: #6A8E00; /* Subtle color change on hover */
+  transform: scale(1.05); /* Slightly grow the text on hover */
 }
+
 
 /* Buttons */
 .btn-primary, .btn-secondary {
@@ -233,18 +234,7 @@ iframe {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optionnel pour effet visuel */
 }
 /* Conseils */
-.section-header {
-  background-color: #f5f5f5; /* Couleur douce */
-  border-bottom: 3px solid #28a745; /* Ligne verte en bas */
-  padding: 10px 15px;
-  margin-bottom: 20px;
-}
 
-.section-header .section-title {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #28a745; /* Vert pour une meilleure lisibilité */
-}
 
 /* Carte Conseil */
 .post-modern {
@@ -348,3 +338,4 @@ a:hover {
   color: #218838;
   text-decoration: underline;
 }
+
